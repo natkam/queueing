@@ -2,6 +2,7 @@ from functools import partial
 
 import numpy as np
 from PIL import Image
+from sklearn.utils import shuffle
 import pathlib
 
 
@@ -41,4 +42,4 @@ def prepare_fit_data():
         [[1, 0]]*len(thunders) + [[0, 1]]*len(wagons)
     )
 
-    return X, Y
+    return shuffle(X, Y)
