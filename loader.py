@@ -42,4 +42,7 @@ def prepare_fit_data():
         [[1, 0]]*len(thunders) + [[0, 1]]*len(wagons)
     )
 
+    X = X.astype('float32') / 255
+    Y = Y.astype('float32')
+
     return shuffle(X, Y)
