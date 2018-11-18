@@ -15,7 +15,6 @@ model.add(layers.Dropout(.2))
 model.add(layers.Dense(500, activation='relu'))
 model.add(layers.Dense(2, activation='softmax'))
 
-
 model.compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accuracy'])
 model.fit(X, Y, validation_split=0.2, epochs=100)
 
