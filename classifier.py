@@ -1,4 +1,3 @@
-import itertools
 import os
 import pathlib
 
@@ -46,24 +45,3 @@ class TrainPhotosClassifier:
         result = model.predict(data)
 
         return result
-
-    def count_wagons(self, result):
-        result_vector = self.vectorize(result)
-
-        thunder = 1
-        wagon_count = 0
-
-        for previous_image, image in zip(result_vector, result_vector[1:]):
-            if previous_image != image and previous_image == thunder:
-                wagon_count += 1
-
-        return wagon_count - 1  # without the locomotive
-
-    def vectorize(self, result):
-        vector = result[:, 0]
-        vector[vector >= 0.5] = 1
-        vector[vector < 0.5] = 0
-
-        return vector
-
-
