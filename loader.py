@@ -10,6 +10,8 @@ CURRENT_DIR = pathlib.Path(__file__).parent
 
 THUNDER_DIRECTORY_PATH = CURRENT_DIR / 'thunder'
 WAGON_DIRECTORY_PATH = CURRENT_DIR / 'wagon'
+UIC_DIRECTORY_PATH = CURRENT_DIR / 'UIC'
+NONUIC_DIRECTORY_PATH = CURRENT_DIR / 'nonUIC'
 
 
 class Loader:
@@ -27,6 +29,27 @@ class Loader:
 
     get_thunders = staticmethod(partial(get_, THUNDER_DIRECTORY_PATH))
     get_wagons = staticmethod(partial(get_, WAGON_DIRECTORY_PATH))
+    get_uic = staticmethod(partial(get_, UIC_DIRECTORY_PATH))
+    get_nonuic = staticmethod(partial(get_, NONUIC_DIRECTORY_PATH))
+
+
+def prepare_uic_data():
+    uic = Loader.get_uic()
+    nonuic = Loader.get_nonuic()
+
+    X = np.vstack((
+        uic,
+        nonuic,
+    ))
+
+    Y = np.array(
+        [[1, 0]]*len(uic) + [[0, 1]]*len(nonuic)
+    )
+
+    X = X.astype('float32') / 255
+    Y = Y.astype('float32')
+
+    return shuffle(X, Y)
 
 
 def prepare_fit_data():
