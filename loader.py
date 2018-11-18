@@ -1,10 +1,9 @@
+import pathlib
 from functools import partial
 
 import numpy as np
 from PIL import Image
 from sklearn.utils import shuffle
-import pathlib
-
 
 CURRENT_DIR = pathlib.Path(__file__).parent
 
